@@ -125,6 +125,9 @@ func main() {
 	GlobalFitness := BestFitness
 	cuF[0] = BestFitness // Assign value to the first element of this vector
 
+	// Start the timer
+	kickStart := time.Now()
+	
 	t := 1
 	for t < T {
 		//Decreasing curve --> Equation 7
@@ -215,12 +218,20 @@ func main() {
 		t++
 
 		if t%50 == 0 { //Print the best fitness every 50 interation (after it passes 100 iteration)
-			fmt.Printf("COA iter %d: %f\n", t, BestFitness)
+			fmt.Printf("COA iteration %d: %f\n", t, BestFitness)
 		}
 
 	}
-
-	fmt.Println(BestFitness)
+	
+	fmt.Println()
+	fmt.Println("Parameters:\n")
+	fmt.Printf("Population N = %d\n", N)
+	fmt.Printf("Maximum Iteration T = %d\n", T)
+	fmt.Printf("Dimension dim = %d\n", ObjF.dim)
+	fmt.Println()
+	fmt.Println("Best Fitness: \n", BestFitness)
+	fmt.Println()
+	fmt.Println("Exececuted in: \n", time.Since(kickStart))
 	//For the function:
 	//Return BestFitness, BestPos, cuF, Globalcov
 
