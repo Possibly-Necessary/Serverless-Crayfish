@@ -231,7 +231,7 @@ func main() {
 	fmt.Println()
 	fmt.Println("Best Fitness: \n", BestFitness)
 	fmt.Println()
-	fmt.Println("Exececuted in: \n", time.Since(kickStart))
+	fmt.Println("Executed in: \n", time.Since(kickStart))
 	//For the function:
 	//Return BestFitness, BestPos, cuF, Globalcov
 
