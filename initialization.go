@@ -67,27 +67,9 @@ func p_obj(x float64) float64 {
 	return 0.2 * (1 / (math.Sqrt(2*math.Pi) * 3)) * math.Exp(-math.Pow(x-25, 2)/(2*math.Pow(3, 2)))
 }
 
-//func CrayFish(N, T, dim int, lb, ub float64, ObjF func([]float64)) (float64, []float64, []float64, []float64){
-
-//}
 
 func main() {
 	rand.Seed(time.Now().UnixNano()) // Seed the random number generator
-
-	//T := 100 // Max iteration
-	//N := 10  // Population
-	//dim := 5
-	// Boundaries (upper-lower) for solution space -- boundries depend on the specific banchmark/problem fucntion used
-	//lb := []float64{-5} // single lower bound of -5 for all dimensions
-	//ub := []float64{5}  // single upper bound of 5 for all dimensions
-
-	//fmt.Println(population)
-
-	// // Testing Schwefel stuff
-	// x := []float64{420.9687, 420.9687} //2D input
-
-	// result := Schwefel(x)
-	// println("Schwefel function result:", result)
 
 	N := 10
 	T := 300 //iteration
@@ -225,7 +207,8 @@ func main() {
 		}
 
 	}
-	
+
+	// Printing stuff
 	fmt.Println()
 	fmt.Println("Parameters:\n")
 	fmt.Printf("Population N = %d\n", N)
@@ -235,7 +218,5 @@ func main() {
 	fmt.Println("Best Fitness: \n", BestFitness)
 	fmt.Println()
 	fmt.Println("Executed in: \n", time.Since(kickStart))
-	//For the function:
-	//Return BestFitness, BestPos, cuF, Globalcov
 
 }
