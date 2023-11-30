@@ -95,6 +95,12 @@ func main() {
 	lb := make([]float64, dim)
 	ub := make([]float64, dim)
 
+	//Assigning the upper & lowerbounds to the float vectors of ub and lb
+	for i := 0; i < dim; i++ {
+		lb[i] = ObjF.Lb
+		ub[i] = ObjF.Ub
+	}
+
 	populationX := initializePopulation(N, dim, lb, ub)
 
 	// Parameters
