@@ -73,7 +73,6 @@ func main() {
 
 	// Initialize the arrays
 	var (
-		cuF         []float64 = make([]float64, T)
 		globalCov   []float64 = make([]float64, T) // zero row vector of size T
 		BestFitness           = math.Inf(1)
 		BestPos     []float64 = make([]float64, dim)
@@ -94,7 +93,6 @@ func main() {
 	// Update best position to Global position
 	copy(GlobalPos, BestPos)
 	GlobalFitness := BestFitness
-	cuF[0] = BestFitness
 
 	Xf := make([]float64, dim) // For Xshade -- array for the cave
 	Xfood := make([]float64, dim)
@@ -184,7 +182,6 @@ func main() {
 		}
 
 		globalCov[t] = GlobalFitness
-		cuF[t] = BestFitness
 
 		t++
 
