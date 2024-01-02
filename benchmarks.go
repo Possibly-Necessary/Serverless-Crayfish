@@ -2,6 +2,7 @@ package main
 
 import (
 	"math"
+	"math/rand"
 )
 
 // Benchmark function F1 - Boundary range [-100,100]
@@ -70,6 +71,19 @@ func F6(x []float64) float64 {
 	for _, value := range x {
 		o += math.Pow(math.Abs(value+0.5), 2)
 	}
+	return o
+}
+
+// Benchmark function F7 - Boundary range [-1.28, 1.28]
+func F7(x []float64) float64 {
+	//dim := len(x)
+	var o float64
+
+	for i, value := range x {
+		o += float64(i+1) * math.Pow(value, 4)
+	}
+
+	o += rand.Float64() // Adding a random number
 	return o
 }
 
