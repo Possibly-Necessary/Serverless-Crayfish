@@ -5,6 +5,21 @@ import (
 	"math/rand"
 )
 
+// Cigar benchmark
+func BentCigarFunction(x []float64) float64 {
+	if len(x) == 0 {
+		panic("Input slice x must contain at least one element.")
+	}
+	// Initialize sum by squaring the first element x1^(2).
+	sum := x[0] * x[0] 
+
+	// Calculate the summation for the squares of the rest of the elements, each multiplied by 10^6
+	for i := 1; i < len(x); i++ {
+		sum += 1e6 * x[i] * x[i] // This is part of the summation from i=2 to the dimension of x.
+	}
+	return sum
+}
+
 // Benchmark function F1 - Boundary range [-100,100]
 func F1(x []float64) float64 {
 	sum := 0.0
