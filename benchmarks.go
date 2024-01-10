@@ -149,7 +149,7 @@ func F7(x []float64) float64 {
 }
 
 // Benchmark function F8 - Boundary range [-500, 500]
-func Schwefel(vec []float64) float64 {
+func F8(vec []float64) float64 {
 	sum := 0.0
 	for _, xi := range vec {
 		//sum += (-xi * math.Sin(math.Sqrt(math.Abs(xi))))
