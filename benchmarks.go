@@ -5,7 +5,7 @@ import (
 	"math/rand"
 )
 
-// FunctionType for functions F1, F2, ..., F6
+// FunctionType for functions F1, F2, ..., F18
 type FunctionType func([]float64) float64
 
 // FunctionData stores the function along with its bounds and dimension
@@ -146,6 +146,17 @@ func F7(x []float64) float64 {
 
 	o += rand.Float64() // Adding a random number
 	return o
+}
+
+// Benchmark function F8 - Boundary range [-500, 500]
+func Schwefel(vec []float64) float64 {
+	sum := 0.0
+	for _, xi := range vec {
+		//sum += (-xi * math.Sin(math.Sqrt(math.Abs(xi))))
+		sum += (-xi * math.Sin(math.Sqrt(math.Abs(xi))))
+	}
+	//return 418.9829*float64(len(vec)) - sum
+	return sum
 }
 
 // Benchmark function F9 - Boundary range [-5.12, 5.12]
