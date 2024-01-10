@@ -5,6 +5,52 @@ import (
 	"math/rand"
 )
 
+// FunctionType for functions F1, F2, ..., F6
+type FunctionType func([]float64) float64
+
+// FunctionData stores the function along with its bounds and dimension
+type FunctionData struct {
+	function FunctionType
+	LB       []float64
+	UB       []float64
+	Dim      int
+}
+
+// Function to returnt the selcted benchmark function (made all the dimension 500 to match the original paper)
+func GetFunction(F string) FunctionData {
+	switch F {
+	case "F1":
+		return FunctionData{F1, []float64{-100.0}, []float64{100.0}, 500}
+	case "F2":
+		return FunctionData{F2, []float64{-10.0}, []float64{10.0}, 500}
+	case "F3":
+		return FunctionData{F3, []float64{-100.0}, []float64{100.0}, 500}
+	case "F4":
+		return FunctionData{F4, []float64{-100.0}, []float64{100.0}, 500}
+	case "F5":
+		return FunctionData{F5, []float64{-30.0}, []float64{30.0}, 500}
+	case "F6":
+		return FunctionData{F6, []float64{-100.0}, []float64{100.0}, 500}
+	case "F7":
+		return FunctionData{F7, []float64{-1.28}, []float64{1.28}, 500}
+	case "F8": 
+		return FunctionData{F8, []float64{-500.0}, []float64{500.0}, 500}
+	case "F9":
+		return FunctionData{F9, []float64{-32.0}, []float64{32.0}, 500}
+	case "F10":
+		return FunctionData{F10, []float64{-32.0}, []float64{32.0}, 500}
+	case "F11":
+		return FunctionData{F11, []float64{-600.0}, []float64{600.0}, 500}
+	case "F16": 
+		return FunctionData{F16, []float64{-5.0}, []float64{5.0}, 500}
+	case "F17":
+		return FunctionData{F17, []float64{-5.0}, []float64{5.0}, 500}
+	case "F18":
+		return FunctionData{F18, []float64{-2.0}, []float64{2.0}, 500}
+	}
+	panic("Function not defined")
+}
+
 // Cigar benchmark
 func BentCigarFunction(x []float64) float64 {
 	if len(x) == 0 {
