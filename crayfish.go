@@ -57,6 +57,9 @@ func initializePopulation(N, dim int, lb, ub float64) [][]float64 {
 
 func main() {
 
+	// Start the timer
+	kickStart := time.Now()
+
 	rand.Seed(time.Now().UnixNano())
 
 	N := 30      // Population
@@ -102,8 +105,6 @@ func main() {
 		Xnew[i] = make([]float64, dim)
 	}
 
-	// Start the timer
-	kickStart := time.Now()
 	t := 0
 	for t < T {
 		//Decreasing curve --> Equation 7
