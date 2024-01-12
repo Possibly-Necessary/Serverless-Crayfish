@@ -1,4 +1,4 @@
-// Crayfish Algorithm with dividing the population and using Go's concurrency for
+// Crayfish Algorithm with dividing the population and using Go's concurrency 
 package main
 
 import (
