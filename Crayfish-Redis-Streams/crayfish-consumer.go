@@ -76,10 +76,10 @@ func main() {
 
 	log.Println("Consumer Started")
 
-	redisClient := redis.NewClient(&redis.Options{
+	redisClient := redis.NewClient(&redis.Options{ // Initialize Redis client
 		Addr: fmt.Sprintf("%s:%s", "127.0.0.1", "6379"),
 	})
-	_, err := redisClient.Ping().Result()
+	_, err := redisClient.Ping().Result() // Ping Redis server
 	if err != nil {
 		log.Fatal("Unbale to connect to Redis", err)
 	}
@@ -89,12 +89,13 @@ func main() {
 	subject := "optimization_results"
 	consumersGroup := "optimization-consumer-group"
 
+	// Create consumer group to read from Redis' stream
 	err = redisClient.XGroupCreate(subject, consumersGroup, "0").Err()
 	if err != nil {
 		log.Println(err)
 	}
-
-	uniqueID := xid.New().String()
+	
+	uniqueID := xid.New().String() // Give each consumer a unique consumer ID
 
 	var (
 		overallBestFit   = math.Inf(1)
@@ -102,10 +103,10 @@ func main() {
 		overallGlobalCov []float64
 	)
 	messageCount := 0
-	totalWorkers := 4
+	totalWorkers := 4 // Number of sub-populations
 
 	for messageCount < totalWorkers {
-		entries, err := redisClient.XReadGroup(&redis.XReadGroupArgs{
+		entries, err := redisClient.XReadGroup(&redis.XReadGroupArgs{ // Read results using 'XReadGroup'
 			Group:    consumersGroup,
 			Consumer: uniqueID, // Use uniqueID here
 			Streams:  []string{subject, ">"},
@@ -117,10 +118,11 @@ func main() {
 			log.Fatal(err)
 		}
 
+		// Iterate over each in the entry and process them
 		for _, message := range entries[0].Messages {
 			bestFit, bestPos, globalCov := parseOptimizationResults(message.Values)
 			updateOverallResults(&overallBestFit, &overallBestPos, &overallGlobalCov, bestFit, bestPos, globalCov)
-			redisClient.XAck(subject, consumersGroup, message.ID)
+			redisClient.XAck(subject, consumersGroup, message.ID) // Acknowledge
 			messageCount++
 		}
 	}
