@@ -74,7 +74,7 @@ func updateOverallResults(overallBestFit *float64, overallBestPos *[]float64, ov
 
 func main() {
 
-	log.Println("Consumer started")
+	log.Println("Consumer Started")
 
 	redisClient := redis.NewClient(&redis.Options{
 		Addr: fmt.Sprintf("%s:%s", "127.0.0.1", "6379"),
