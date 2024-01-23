@@ -213,7 +213,7 @@ func main() {
 	// Redis Connection stuff
 	log.Println("Publisher Started")
 
-	redisClient := redis.NewClient(&redis.Options{ // Initialize Redit client and connect to the server at `127.0.0.1:6379'
+	redisClient := redis.NewClient(&redis.Options{ // Initialize Redis client and connect to the server at `127.0.0.1:6379'
 		Addr: fmt.Sprintf("%s:%s", "127.0.0.1", "6379"),
 	})
 	_, err := redisClient.Ping().Result() // Ping Redis server to check the connection
