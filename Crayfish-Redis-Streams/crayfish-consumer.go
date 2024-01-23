@@ -48,7 +48,6 @@ func parseOptimizationResults(values map[string]interface{}) (bestFit float64, b
 	bestPosStr := values["bestPosition"].(string)
 	bestPos, _ = parseStringSliceToFloatSlice(bestPosStr)
 
-	// Parse GlobalCov
 	// Parse globalCov
 	globalCovStr := values["globalCov"].(string)
 	globalCov, _ = parseStringSliceToFloatSlice(globalCovStr)
