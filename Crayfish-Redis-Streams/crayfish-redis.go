@@ -188,8 +188,8 @@ func publishOptimizationResults(client *redis.Client, bestPos []float64, bestFit
 	bestPosStr := fmt.Sprintf("%v", bestPos)
 	globalCovStr := fmt.Sprintf("%v", globalCov)
 
-	err := client.XAdd(&redis.XAddArgs{
-		Stream: "optimization_results",
+	err := client.XAdd(&redis.XAddArgs{ // XAdd method to add data to the Redis stream
+		Stream: "optimization_results", // Stream name
 		ID:     "",
 		Values: map[string]interface{}{
 			"bestPosition": bestPosStr,
@@ -216,21 +216,21 @@ func main() {
 	redisClient := redis.NewClient(&redis.Options{ // Initialize Redit client and connect to the server at `127.0.0.1:6379'
 		Addr: fmt.Sprintf("%s:%s", "127.0.0.1", "6379"),
 	})
-	_, err := redisClient.Ping().Result()
+	_, err := redisClient.Ping().Result() // Ping Redis server to check the connection
 	if err != nil {
 		log.Fatal("Unbale to connect to Redis", err)
 	}
 
 	log.Println("Connected to Redis server")
 
-	// intialize the split population
+	// intialize the split population of crayfish
 	X := initializePopulation(N, dim, K, lb, ub)
 
 	// Process each sub-population
-	for _, subPop := range X {
-		bestPos, globalCov := crayfish(T, lb, ub, subPop)
+	for _, subPop := range X { // For each sub-population in X
+		bestPos, globalCov := crayfish(T, lb, ub, subPop) // This part will be parallel in Nuclio
 		bestFit := F6(bestPos)
-
+		// Publish result to Redis
 		err := publishOptimizationResults(redisClient, bestPos, bestFit, globalCov)
 		if err != nil {
 			log.Fatal("Failed to publish results to Redis.\n", err)
