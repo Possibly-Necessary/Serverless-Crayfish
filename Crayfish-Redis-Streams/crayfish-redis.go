@@ -11,7 +11,7 @@ import (
 	"github.com/go-redis/redis"
 )
 
-// Benchmark function F6 - Boundary range [-100,100] --> will remove this and implement benchmark
+// Benchmark function F6 - Boundary range [-100,100] --> will remove this and implement benchmark function
 func F6(x []float64) float64 {
 	var o float64
 	for _, value := range x {
@@ -209,15 +209,9 @@ func main() {
 	ub := []float64{100.0}
 	dim := 3
 
-	/*
-		var (
-			overallBestFit   = math.Inf(1)
-			overallBestPos   = make([]float64, dim)
-			overallGlobalCov = make([]float64, T) // to accumulate global convergance
-		) */
 
 	// Redis Connection stuff
-	log.Println("Publisher started")
+	log.Println("Publisher Started")
 
 	redisClient := redis.NewClient(&redis.Options{
 		Addr: fmt.Sprintf("%s:%s", "127.0.0.1", "6379"),
