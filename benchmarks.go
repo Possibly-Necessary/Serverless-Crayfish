@@ -3,7 +3,7 @@ package main
 import (
 	"math"
 	"math/rand"
-)
+) 
 
 // FunctionType for functions F1, F2, ..., F18
 type FunctionType func([]float64) float64
@@ -16,7 +16,7 @@ type FunctionData struct {
 	Dim      int
 }
 
-// Function to returnt the selcted benchmark function (made all the dimension 500 to match the original paper)
+// Function to returnt the selcted benchmark (made all the dimension 500 to match the original paper)
 func GetFunction(F string) FunctionData {
 	switch F {
 	case "F1":
